@@ -19,7 +19,7 @@ FORMS += mainwindow.ui
 OTHER_FILES += \
     finger.png \
     background.png \
-    virtual_joystick.qml
+    VirtualJoystick.qml
 
 RESOURCES += \
     resources.qrc

@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.0
 
 Rectangle {
     id: root
@@ -13,7 +13,8 @@ Rectangle {
 
     Image {
         id: joystick
-
+        height: root.height
+        width: root.height
 
         property real angle : 0
         property real distance : 0
@@ -29,10 +30,12 @@ Rectangle {
                 to: 0; duration: 200; easing.type: Easing.OutSine }
         }
 
-        MouseArea {
+        MultiPointTouchArea {
             id: mouse
-            property real mouseX2 : verticalOnly ? width * 0.5 : mouseX
-            property real mouseY2 : horizontalOnly ? height * 0.5 : mouseY
+            maximumTouchPoints: 1
+            minimumTouchPoints: 1
+            property real mouseX2 : width * 0.5
+            property real mouseY2 : height * 0.5
             property real fingerAngle : Math.atan2(mouseX2, mouseY2)
             property int mcx : mouseX2 - width * 0.5
             property int mcy : mouseY2 - height * 0.5
@@ -55,7 +58,13 @@ Rectangle {
                 joystick_moved(0, 0);
             }
 
-            onPositionChanged: {
+            onUpdated: {
+                if (!verticalOnly)
+                    mouseX2 = touchPoints.length ? touchPoints[0].x : width * 0.5
+
+                if (!horizontalOnly)
+                    mouseY2 = touchPoints.length ? touchPoints[0].y : width * 0.5
+
                 if (fingerInBounds) {
                     thumb.anchors.horizontalCenterOffset = mcx
                     thumb.anchors.verticalCenterOffset = mcy
@@ -86,6 +95,8 @@ Rectangle {
             id: thumb
             source: "finger.png"
             anchors.centerIn: parent
+            height: root.height * (52.0/160.0)
+            width: root.width * (52.0/160.0)
         }
     }
 }

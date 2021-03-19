@@ -29,7 +29,7 @@ void MainWindow::addJoyStick(QLayout *layout_, JoyType type)
      * that packages the final .app on Mac forgets to add the QML
      * if you reference it directly
      */
-    view->setSource(QUrl("qrc:/res/virtual_joystick.qml"));
+    view->setSource(QUrl("qrc:/res/VirtualJoystick.qml"));
 
     /* Enable transparent background on the QQuickView
      * Note that this currently does not work on Windows

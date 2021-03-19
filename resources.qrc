@@ -2,6 +2,6 @@
     <qresource prefix="/res">
         <file>background.png</file>
         <file>finger.png</file>
-        <file>virtual_joystick.qml</file>
+        <file>VirtualJoystick.qml</file>
     </qresource>
 </RCC>
